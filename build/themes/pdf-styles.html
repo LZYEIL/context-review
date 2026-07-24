@@ -1,0 +1,71 @@
+<!-- PDF-only styling (WeasyPrint). HTML output / online site are unaffected. -->
+<!-- Covers: the author block, section numbering, and the injected Contents page. -->
+
+<style>
+  /* ---- Author block: two columns so all authors fit on the title page ---- */
+  h2#authors + ul {
+    column-count: 2;
+    column-gap: 1.5rem;
+    padding-left: 0;
+    list-style: none;
+  }
+  h2#authors + ul > li {
+    break-inside: avoid;   /* keep each author intact within a column */
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+  }
+  h2#authors + ul > li > p {
+    margin: 0;
+  }
+
+  /* ---- Section numbering: number content sections, skip front/back matter ---- */
+  body {
+    counter-reset: section;
+  }
+  h2:not(#authors):not(#abstract):not(#references):not(#appendix-a) {
+    counter-increment: section;
+  }
+  h2:not(#authors):not(#abstract):not(#references):not(#appendix-a)::before {
+    content: counter(section) ". ";
+  }
+
+  /* ---- Printed table of contents (injected by build/pandoc/filters/toc.lua) ---- */
+  #TOC {
+    page-break-before: always;
+    counter-reset: tocsec;
+  }
+  #TOC::before {
+    content: "Contents";
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  #TOC ul {
+    list-style: none;
+    padding-left: 1rem;
+    margin: 0;
+  }
+  #TOC > ul {
+    padding-left: 0;
+  }
+  #TOC li {
+    margin: 0.15rem 0;
+    line-height: 1.4;
+  }
+  #TOC a {
+    text-decoration: none;
+    color: inherit;
+  }
+  /* number the same content sections in the ToC, matching the body */
+  #TOC a.numbered {
+    counter-increment: tocsec;
+  }
+  #TOC a.numbered::before {
+    content: counter(tocsec) ". ";
+  }
+  /* dot leader + resolved page number for each entry */
+  #TOC a::after {
+    content: leader(". ") target-counter(attr(href url), page);
+  }
+</style>

@@ -16,11 +16,21 @@ local max_level = 2
 -- Front-matter headers that sit above the ToC and should not list themselves.
 local skip_ids = { authors = true }
 
+-- Content sections get a number (in both the body and this ToC); front/back
+-- matter (abstract, references, appendices) is listed but left unnumbered.
+local function is_numbered(id)
+  if id == "abstract" or id == "references" then return false end
+  if id:match("^appendix") then return false end
+  return true
+end
+
 function Pandoc(doc)
   local items = {}
   for _, blk in ipairs(doc.blocks) do
     if blk.t == "Header" and blk.level <= max_level and not skip_ids[blk.identifier] then
-      local link = pandoc.Link(blk.content:clone(), "#" .. blk.identifier)
+      local classes = is_numbered(blk.identifier) and { "numbered" } or {}
+      local link = pandoc.Link(blk.content:clone(), "#" .. blk.identifier, "",
+        pandoc.Attr("", classes, {}))
       table.insert(items, { pandoc.Plain({ link }) })
     end
   end
