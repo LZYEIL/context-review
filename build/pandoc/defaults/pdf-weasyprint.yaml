@@ -1,6 +1,12 @@
 # Pandoc --defaults for PDF output via weasyprint.
 # Load on top of HTML defaults.
 output-file: output/manuscript.pdf
+# Printed table of contents (PDF only; HTML output is unaffected).
+# toc.lua injects a Contents block after the author list; toc.html styles it.
+filters:
+- build/pandoc/filters/toc.lua
+include-in-header:
+- build/themes/toc.html
 pdf-engine: weasyprint
 pdf-engine-opts:
 - '--presentational-hints'
