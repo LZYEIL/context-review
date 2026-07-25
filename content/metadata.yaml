@@ -27,7 +27,7 @@ authors:
     email: cellingt@cs.cmu.edu
     affiliations:
       - Computational Biology Department, Carnegie Mellon University
-    corresponding: false
+    corresponding: true
   - github: Clouddelta
     name: Jingyun Jia
     initials: JJ
