@@ -5,7 +5,7 @@
   (before the front matter). This filter instead builds a Contents block from
   the level-1/level-2 section headers and inserts it just before the Abstract,
   so it follows the title and author list. PDF styling (dot leaders, resolved
-  page numbers, page break) lives in build/themes/toc.html and is applied by
+  page numbers, page break) lives in build/themes/pdf-styles.html and is applied by
   WeasyPrint. Only wired into the PDF build via build/pandoc/defaults/pdf-weasyprint.yaml.
 
   Note: this reaches into Manubot's pandoc pipeline; revisit if a Manubot

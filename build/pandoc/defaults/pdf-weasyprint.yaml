@@ -2,10 +2,12 @@
 # Load on top of HTML defaults.
 output-file: output/manuscript.pdf
 # PDF-only presentation (HTML output is unaffected): toc.lua injects a Contents
-# block after the author list; pdf-styles.html styles the author block, section
-# numbering, and that Contents page.
+# block after the author list; icon-links.lua keeps author icons attached to
+# their handles; pdf-styles.html styles the author block, section numbering, and
+# that Contents page.
 filters:
 - build/pandoc/filters/toc.lua
+- build/pandoc/filters/icon-links.lua
 include-in-header:
 - build/themes/pdf-styles.html
 pdf-engine: weasyprint

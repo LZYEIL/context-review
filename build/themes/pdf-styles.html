@@ -28,6 +28,16 @@
   h2#authors + ul > li > p {
     margin: 0;
   }
+  /* the base theme lets links break mid-word; in a half-width column that cuts
+     handles in two ("pr / obablybots"), so wrap identifier lines only at the
+     "·" separators. icon-links.lua groups each icon with its handle. */
+  h2#authors + ul a {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
   /* keep the correspondence line below the author grid, full width */
   #correspondence {
     clear: both;
